@@ -49,12 +49,12 @@ Page({
     console.log('Going to add-work-view')
     if (app.globalData.worker) {
       wx.navigateTo({
-        url: '../works/add/add',
+        url: '/pages/works/add/add',
       })
     } else {
       app.workerReadyCallback = () => {
         wx.navigateTo({
-          url: '../works/add/add',
+          url: '/pages/works/add/add',
         })
       }
     }

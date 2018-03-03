@@ -4,8 +4,8 @@
     "pages/logs/logs",
     "pages/works/works",
     "pages/works/add/add",
-    "pages/projects/add/add",
-    "pages/projects/detail/detail"
+    "pages/projects/detail/detail",
+    "pages/projects/list/list"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -26,10 +26,10 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/works/works",
+        "pagePath": "pages/projects/list/list",
         "iconPath": "images/ic_inbox_black_36dp_me.png",
         "selectedIconPath": "images/ic_inbox_black_36dp.png",
-        "text": "工作"
+        "text": "项目"
       },
       {
         "pagePath": "pages/logs/logs",

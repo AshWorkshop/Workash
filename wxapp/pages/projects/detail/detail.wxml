@@ -29,7 +29,7 @@
               </view>
           </picker>
       </view>
-      <view class="section">
+      <view class="section form-bottom">
           <view class="section__title">项目状态</view>
           <view class="switch-text">
               <text>{{status}}</text>

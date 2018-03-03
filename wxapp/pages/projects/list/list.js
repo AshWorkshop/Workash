@@ -1,4 +1,4 @@
-// pages/projects/add/add.js
+// pages/projects/list/list.js
 Page({
 
   /**
