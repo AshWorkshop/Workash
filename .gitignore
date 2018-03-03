@@ -101,9 +101,9 @@ ENV/
 .mypy_cache/
 
 # secrets
-wxapp/project.config.json
+project.config.json
 backend/project/wx/secret.py
-wxapp/utils/config.js
+utils/config.js
 
 # emacs
 *~
@@ -114,3 +114,4 @@ wxapp/utils/config.js
 # local_files
 backend/project/wx/migrations/
 backend/project/worker/migrations/
+.DS_Store
