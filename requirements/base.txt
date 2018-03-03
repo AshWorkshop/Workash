@@ -1,9 +1,0 @@
-django
-djangorestframework
-django-environ
-django-filter
-bootstrap-admin
-drf-yasg
-swagger_spec_validator
-flex
-pycrypto
