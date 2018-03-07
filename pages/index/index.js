@@ -59,7 +59,7 @@ Page({
       }
     }
   },
-  onShow: function () {
+  onLoad: function () {
     // wx.showToast({
     //   title: '正在加载数据...',
     //   icon: 'loading',
