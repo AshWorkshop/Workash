@@ -1,27 +1,99 @@
 /* pages/projects/list/list.wxss */
-.flex-row {
+.list-container {
   height: 100%;
+}
+.flex-row {
+  display: flex;
   flex-direction: column;
   align-items: left;
-  justify-content: space-between;
-  padding: 40rpx 0rpx;
   box-sizing: border-box;
+}
+
+.project-item {
+  display: flex;
+  width: 100%;
+  margin-bottom: 10rpx;
+  flex-direction: column;
+  padding: 20rpx 30rpx;
+  background-color: white;
+  align-items: left;
+}
+
+.project-top {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.project-hours {
+  margin-right: 60rpx;
+  font-size: 25pt;
+}
+
+.project-text {
+  display: flex;
+  flex-direction: column;
+  height: 140rpx;
+}
+
+.project-title {
+  text-align: left;
+  font-size: 13pt;
+  font-weight: 600;
+}
+
+.project-detail {
+  margin-top: 10rpx;
+  text-align: left;
+  font-size: 9pt;
+  font-weight: lighter;
+}
+
+.project-bottom {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 9pt;
+  text-align: left;
+  font-weight: lighter;
+}
+
+.project-bottom-text {
+  font-weight: 500;
+  color: green;
+  margin-right: 60rpx;
+}
+
+.project-by {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+
+.manager-avatar {
+  width: 32rpx;
+  height: 32rpx;
+  margin: 0 10rpx 0 20rpx;
 }
 
 .swiper-tab{  
     width: 100%;  
-    border-bottom: 2rpx solid #777777;  
     text-align: center;  
     line-height: 80rpx;}  
-.swiper-tab-list{  font-size: 30rpx;  
+.swiper-tab-list{  
+    font-size: 30rpx;  
     display: inline-block;  
     width: 33.33%;  
     color: #777777;  
 }  
-.on{ color: #da7c0c;  
-    border-bottom: 5rpx solid #da7c0c;}  
+.on{
+    color: black;  
+    border-bottom: 5rpx solid black;}  
   
 .swiper-box{ display: block; height: 100%; width: 100%; overflow: hidden; }  
 .swiper-box view{  
     text-align: center;  
-}  
+}

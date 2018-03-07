@@ -1,0 +1,24 @@
+<!--pages/works/list/list.wxml-->
+<view class="flex-row">
+            <block wx:for="{{works}}" wx:for-item="work">
+                <view class="work-item">
+                    <view class="work-top">
+                        <view class="work-text">
+                            <text class="work-title">{{work.name}}</text>
+                            <text class="work-detail">{{work.content}}</text>
+                        </view>
+                        <text class="work-hours">{{work.hours}}h</text>
+                    </view>
+                    
+                    <view class="work-bottom">
+                        <view class="work-by">
+                            <text>by</text>
+                            <image class="manager-avatar" src="{{work.worker.wxUser.avatarUrl}}"></image>
+                            <text>{{work.worker.wxUser.nickName}}</text>
+                        </view>
+                        <text class="work-bottom-text">{{work.time}}</text>
+                    </view>
+
+                </view>
+            </block>
+</view> 
