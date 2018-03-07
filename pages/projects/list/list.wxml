@@ -11,8 +11,8 @@
     <swiper-item>
         <view class="flex-row">
             <block wx:for="{{parts}}" wx:for-item="project">
-                <view id="{{project.url}}" bindtap="onProjectTap" class="project-item" >
-                    <view class="project-top">
+                <view class="project-item" >
+                    <view id="{{project.url}}" bindtap="onProjectTap" class="project-top">
                         <view class="project-text">
                             <text class="project-title">{{project.name}}</text>
                             <text class="project-detail">{{project.detail}}</text>
@@ -35,8 +35,8 @@
     <swiper-item>  
         <view class="flex-row">
             <block wx:for="{{projects}}" wx:for-item="project">
-                <view id="{{project.url}}" bindtap="onProjectTap" class="project-item">
-                    <view class="project-text">
+                <view class="project-item">
+                    <view id="{{project.url}}" bindtap="onProjectTap" class="project-text">
                         <text class="project-title">{{project.name}}</text>
                         <text class="project-detail">{{project.detail}}</text>
                     </view>
@@ -57,10 +57,13 @@
     <swiper-item>  
         <view class="flex-row">
             <block wx:for="{{part_ends}}" wx:for-item="project">
-                <view id="{{project.url}}" bindtap="onProjectTap" class="project-item">
-                    <view class="project-text">
-                        <text class="project-title">{{project.name}}</text>
-                        <text class="project-detail">{{project.detail}}</text>
+                <view class="project-item">
+                    <view id="{{project.url}}" bindtap="onProjectTap" class="project-top">
+                        <view class="project-text">
+                            <text class="project-title">{{project.name}}</text>
+                            <text class="project-detail">{{project.detail}}</text>
+                        </view>
+                        <text class="project-hours">{{project.totalHours}}h</text>
                     </view>
                     <view class="project-bottom">
                         <view class="project-by">
