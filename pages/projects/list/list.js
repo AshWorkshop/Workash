@@ -14,6 +14,12 @@ Page({
     projects: [],
     part_ends: [],
   },
+  onProjectTap: function (e) {
+    console.log(e);
+    wx.navigateTo({
+      url: '../detail/detail?url=' + e.currentTarget.id,
+    })
+  },
   onLoad: function () {
     var that = this;
 

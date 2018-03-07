@@ -11,7 +11,7 @@
     <swiper-item>
         <view class="flex-row">
             <block wx:for="{{parts}}" wx:for-item="project">
-                <view class="project-item">
+                <view id="{{project.url}}" bindtap="onProjectTap" class="project-item" >
                     <view class="project-top">
                         <view class="project-text">
                             <text class="project-title">{{project.name}}</text>
@@ -35,7 +35,7 @@
     <swiper-item>  
         <view class="flex-row">
             <block wx:for="{{projects}}" wx:for-item="project">
-                <view class="project-item">
+                <view id="{{project.url}}" bindtap="onProjectTap" class="project-item">
                     <view class="project-text">
                         <text class="project-title">{{project.name}}</text>
                         <text class="project-detail">{{project.detail}}</text>
@@ -57,7 +57,7 @@
     <swiper-item>  
         <view class="flex-row">
             <block wx:for="{{part_ends}}" wx:for-item="project">
-                <view class="project-item">
+                <view id="{{project.url}}" bindtap="onProjectTap" class="project-item">
                     <view class="project-text">
                         <text class="project-title">{{project.name}}</text>
                         <text class="project-detail">{{project.detail}}</text>
