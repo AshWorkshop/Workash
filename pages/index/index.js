@@ -66,10 +66,10 @@ Page({
     var sessionid = app.globalData.sessionid
     app.globalData.worker = null;
     if (sessionid) {
-      requests.getWorker(sessionid)
+      requests.getWorker(sessionid, this)
     } else {
       app.loginCallback = sessionid => {
-        requests.getWorker(sessionid)
+        requests.getWorker(sessionid, this)
       }
     }
   },
