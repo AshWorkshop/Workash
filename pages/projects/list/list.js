@@ -1,6 +1,7 @@
 // pages/projects/list/list.js
 var util = require('../../../utils/util.js');
-var app = getApp()
+var requests = require('../../../utils/requests.js');
+var app = getApp();
 Page({
   data: {
     /** 
@@ -37,9 +38,39 @@ Page({
 
     });
   },
-  onShow: function () {
+  onPullDownRefresh: function () {
+    wx.showNavigationBarLoading() //在标题栏中显示加载
     var that = this;
-    if (app.globalData.worker.isPropLoaded) {
+    var sessionid = app.globalData.sessionid
+    app.globalData.worker = null;
+    if (sessionid) {
+      requests.getWorker(sessionid)
+    } else {
+      app.loginCallback = sessionid => {
+        requests.getWorker(sessionid)
+      }
+    }
+    if (app.globalData.worker) {
+      that.getDatas();
+    } else {
+      app.workerReadyCallback = () => {
+        that.getDatas();
+      }
+    }
+  },
+  onShow: function () {
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    var that = this;
+    var sessionid = app.globalData.sessionid
+    app.globalData.worker = null;
+    if (sessionid) {
+      requests.getWorker(sessionid)
+    } else {
+      app.loginCallback = sessionid => {
+        requests.getWorker(sessionid)
+      }
+    }
+    if (app.globalData.worker) {
       that.getDatas();
     } else {
       app.workerReadyCallback = () => {
@@ -78,6 +109,7 @@ Page({
     let part_ends = [];
     let managerPromises = [];
     let wxUserPromises = [];
+    wx.showNavigationBarLoading() //在标题栏中显示加载
     for (let part of raw_parts){
       managerPromises.push(() => {
         return part.manager.load.apply(part.manager)
@@ -108,6 +140,8 @@ Page({
       }
 
       util.queue(wxUserPromises, 5).then(res => {
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
         this.setData({
           parts: parts,
           part_ends: part_ends,

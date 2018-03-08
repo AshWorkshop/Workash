@@ -52,8 +52,10 @@ function queue(fns, count) {
   })
 }
 
+
+
 module.exports = {
   formatTime: formatTime,
   formatDate: formatDate,
-  queue: queue
+  queue: queue,
 }

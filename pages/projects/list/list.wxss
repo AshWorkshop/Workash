@@ -64,6 +64,7 @@
   font-weight: 500;
   color: green;
   margin-right: 60rpx;
+  font-size: 11pt;
 }
 
 .project-by {

@@ -10,6 +10,7 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
+    "backgroundColor": "#cccccc",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "我的工时",
     "navigationBarTextStyle": "black"

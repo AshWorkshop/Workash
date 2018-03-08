@@ -2,6 +2,7 @@
 var wxRequest = require('../../utils/wxRequest.js');
 var wxApi = require('../../utils/wxApi.js');
 var util = require('../../utils/util.js');
+var requests = require('../../utils/requests.js');
 var config = require('../../utils/config.js').config;
 var Promise = require('../../plugins/es6-promise.js');
 var Worker = require('../../utils/worker/Worker.js').Worker;
@@ -59,15 +60,26 @@ Page({
       }
     }
   },
+  onPullDownRefresh: function () {
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+
+    var sessionid = app.globalData.sessionid
+    app.globalData.worker = null;
+    if (sessionid) {
+      requests.getWorker(sessionid)
+    } else {
+      app.loginCallback = sessionid => {
+        requests.getWorker(sessionid)
+      }
+    }
+  },
   onLoad: function () {
     // wx.showToast({
     //   title: '正在加载数据...',
     //   icon: 'loading',
     //   duration: 10000
     // })
-    wx.showLoading({
-      title: '正在加载数据...',
-    });
+    wx.showNavigationBarLoading(); //在标题栏中显示加载
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -97,12 +109,13 @@ Page({
 
     //-------------------- Get WorkerInfo --------------------
     var sessionid = app.globalData.sessionid
+    let data = null;
     app.globalData.worker = null;
     if (sessionid) {
-      this.getWorkerInfo(sessionid)
+      requests.getWorker(sessionid, this)
     } else {
       app.loginCallback = sessionid => {
-        this.getWorkerInfo(sessionid)
+        requests.getWorker(sessionid, this)
       }
     }
     //--------------------------------------------------------
@@ -116,72 +129,4 @@ Page({
       hasUserInfo: true
     })
   },
-  getWorkerInfo: function(sessionid) {
-    var host = config.host
-    var that = this
-    var workerInfo = null
-    console.log('Start handling worker info...')
-    wxRequest.getRequest(host + 'worker/getworker/', {}, sessionid).then(res => {
-      workerInfo = res.data
-      console.log('workerInfo: ' + workerInfo.url)
-    }).catch(res => {
-      if (res.statusCode == 404){
-        console.log('Worker not exists, creating a new one...')
-        return wxRequest.postRequest(host + 'worker/workers/', {}, sessionid).then(res => {
-          console.log(res)
-          console.log('Successfully created a new worker!')
-          workerInfo = res.data
-        })
-      }
-    }).finally(res => {
-      console.log('Successfully got worker info!')
-      console.log(workerInfo)
-      app.globalData.workerInfo = workerInfo;
-      app.globalData.worker = new Worker({
-        url: workerInfo.url,
-        loadData: {
-          sessionid: app.globalData.sessionid
-        },
-        loader: loaders.workerLoader
-      });
-      app.globalData.worker.load().then(res => {
-        console.log(app.globalData.worker);
-        app.globalData.worker.loadProps().then(res => {
-          console.log(app.globalData.worker);
-
-          let total = 0.0;
-          let defaultPartUrl = wx.getStorageSync('defaultPartUrl') || "None";
-          let defaultIndex = 0;
-          let parts = app.globalData.worker.participations.concat();
-          
-          if (defaultPartUrl in app.globalData.worker.participationUrls) {
-            defaultIndex = app.globalData.worker.participationUrls[defaultPartUrl] + 1;
-          }
-          for (let part of parts) {
-            total += part.totalHours;
-          }
-          parts.unshift({ name: "全部", totalHours: total });
-
-          this.setData({
-            totalHours: parts[defaultIndex].totalHours,
-            totalHoursRange: parts,
-            totalHoursDefault: defaultIndex,
-            partName: parts[defaultIndex].name
-          });
-          // ---------- Has worker info callback ----------
-          if (app.workerReadyCallback) {
-            app.workerReadyCallback();
-          }
-          // ----------------------------------------------
-          wx.hideLoading();
-          
-        }).catch(res => {
-          console.log(res);
-        });
-      }).catch(res => {
-        console.log(res);
-      });
-      
-    })
-  }
 })
