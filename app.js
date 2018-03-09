@@ -38,6 +38,8 @@ App({
         console.log('Getting userinfo')
         if (res.authSetting['scope.userInfo']) {
           that.getUserInfo(sessionid);
+        } else {
+          that.getUserInfo(sessionid);
         }
         // } else {
         //   console.log('Not auth');
